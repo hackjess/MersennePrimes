@@ -1,5 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 
-
+table .table-responsive .table-striped .primes, table .table-responsive .table-striped .primes th, td{
+	text-align: center;
+}
 
