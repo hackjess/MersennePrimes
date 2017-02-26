@@ -27,11 +27,9 @@ function Loader(exponent) {
 	//fetchBlock
 	this.fetchBlock = function(block)
 	{
-		//console.log("HERE");
 		block = String(block);
 		if( this.dictionary[block] === undefined )
 		{
-			console.log("fetch new");
 			var req = new XMLHttpRequest();
 			req.open('GET', FILE_PREPEND + this.exponent + '/' + block, false);
 			req.overrideMimeType('text\/plain; charset=x-user-defined');
@@ -56,7 +54,6 @@ function Loader(exponent) {
 		}
 		else
 		{
-			console.log("cache hit");
 			return this.dictionary[block];
 		}
 	}
