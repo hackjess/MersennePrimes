@@ -4,6 +4,8 @@ var position = 0;
 var subposition = 0.0;
 var mouseY = 0;
 var active = false;
+var weight = 0;
+var startingPos = [];
 
 var blocks = {};
 
@@ -13,14 +15,14 @@ $(document).ready(function(){
 	
 	if( exponent == '' )
 	{
-		window.location.href = "index.html";
+		//window.location.href = "index.html";
 	}
 	
 	var length = fetchSize(exponent);
 	
 	if( length == -1 )
 	{
-		window.location.href = "index.html";
+		//window.location.href = "index.html";
 	}
 	
 	update();
@@ -33,11 +35,22 @@ $(document).ready(function(){
 		else
 		{
 			var delta = e.pageY - mouseY;
+			
 		}
 	});
 	
-	$(".scrollbar").mouseDown(function(){
-		alert(this.index());
+	$(".scrollbar").mousedown(function(){
+		active = true;
+		$(".scroll-box").each(function( index ){
+			startingPos[index] = $( this ).css("top");
+		});
+		console.log(startingPos);
+		weight = (6 - $(this).index()) * 10;
+	});
+	
+	$(window).mouseup(function(){
+		active = false;
+		console.log("up");
 	});
 	
 	$(window).resize(function(){
