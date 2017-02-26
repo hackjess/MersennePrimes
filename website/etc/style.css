@@ -3,6 +3,7 @@
 
 body#viewer{
 	overflow: hidden;
+	font-family: 'Cousine', monospace;
 }
 
 body#index{
