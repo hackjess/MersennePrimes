@@ -89,3 +89,10 @@ body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+.col-md-12.title, h2#title, #titlerow{
+	background-image: url("gradient.png");
+    background-repeat: repeat-x;
+	height: 100%;
+	z-index: 20;
+}
