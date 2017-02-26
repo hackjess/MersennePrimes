@@ -1,12 +1,13 @@
 BLOCK_SIZE = 10000; //Number of characters!
 SCROLL_BAR_HEIGHT = 475;
+COEFFICIENT = 9
 
 var position = 0;
 var mouseY = 0;
 var active = false;
 var startingIndex = 0;
 var startingPosition = 0;
-var length = 600000; //Reset back to zero & uncomment lines below
+var length = 22338618; //Reset back to zero & uncomment lines below
 
 var blocks = {};
 
@@ -38,7 +39,7 @@ $(document).ready(function(){
 			var delta = e.pageY - mouseY;
 			position = Math.min(length, Math.max( 0,
 				startingPosition +
-				delta * 10**(startingIndex - 1)
+				delta * COEFFICIENT**(startingIndex - 1)
 			));
 			updateSliders();
 		}
@@ -61,10 +62,9 @@ $(document).ready(function(){
 });
 
 function updateSliders(){
-	console.log(position);
 	$(".scroll-box").each(function( index ){
 		$( this ).css("top",
-			position * 1/10**(index - 1) % SCROLL_BAR_HEIGHT
+			position * 1/COEFFICIENT**(index - 1) % SCROLL_BAR_HEIGHT
 		);
 	});
 }
