@@ -1,4 +1,5 @@
 var SCROLL_BAR_HEIGHT = 475;
+var DIGIT_WIDTH = 18;
 var COEFFICIENT = 9;
 var SCROLL_BOX_HEIGHT = 20;
 var SCROLL_BUTTON_INTERVAL = 100;
@@ -18,7 +19,7 @@ $(document).ready(function(){
 	
 	if( exponent == '' )
 	{
-		window.location.href = "index.html";
+		//window.location.href = "index.html";
 	}
 	
 	extern = new Loader(exponent);
@@ -26,7 +27,7 @@ $(document).ready(function(){
 	
 	if( length == -1 )
 	{
-		window.location.href = "index.html";
+		//window.location.href = "index.html";
 	}
 	
 	//Set height of scroll stops
@@ -34,7 +35,7 @@ $(document).ready(function(){
 		$( this ).css("top", maxPos(index) % SCROLL_BAR_HEIGHT );
 	});
 	
-	updateSliders();
+	update();
 	
 	$(document).mousemove(function(e){
 		if( !active )
@@ -45,7 +46,7 @@ $(document).ready(function(){
 		{
 			var delta = e.pageY - mouseY;
 			setPos( startingPosition + delta * invPos(startingIndex) );
-			updateSliders();
+			update();
 		}
 	});
 	
@@ -81,14 +82,31 @@ $(document).ready(function(){
 	});
 	function scrollUp() {
 		setPos(position - 1);
-		updateSliders();
+		update();
 	}
 	function scrollDown() {
 		setPos(position + 1);
-		updateSliders();
+		update();
 	}
 	
 });
+
+function update(){
+	updateSliders();
+	updateContent();
+}
+
+function updateContent(){
+	var contentWidth = $(".digits").innerWidth();
+	var digitsPerRow = Math.floor( contentWidth / DIGIT_WIDTH);
+	var row = Math.floor( position / digitsPerRow );
+	
+	$(".digits").each(function( index ){
+		$( this ).html(
+			extern.getString(row * digitsPerRow, digitsPerRow));
+		row += 1;
+	});
+}
 
 function updateSliders(){
 	$(".scrollbar").each(function( index ){

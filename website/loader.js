@@ -1,4 +1,4 @@
-var FILE_PREPEND = "exp/";
+var FILE_PREPEND = "numbers/";
 var BLOCK_SIZE = 10000;
 
 function Loader(exponent) {
