@@ -30,11 +30,10 @@ $(document).ready(function(){
 	
 	//Set height of scroll stops
 	$(".scroll-stopper").each(function( index ){
-		var value = (length * 1/COEFFICIENT**(index - 1) % SCROLL_BAR_HEIGHT);
-		console.log(index, value);
-		//$( this ).css("height", SCROLL_BAR_HEIGHT);
-		$( this ).css("top", value);
+		$( this ).css("top", maxPos(index) % SCROLL_BAR_HEIGHT );
 	});
+	
+	updateSliders();
 	
 	$(document).mousemove(function(e){
 		if( !active )
@@ -45,8 +44,7 @@ $(document).ready(function(){
 		{
 			var delta = e.pageY - mouseY;
 			position = Math.min(length, Math.max( 0,
-				startingPosition +
-				delta * COEFFICIENT**(startingIndex - 1)
+				startingPosition + delta * invPos(startingIndex)
 			));
 			updateSliders();
 		}
@@ -69,11 +67,34 @@ $(document).ready(function(){
 });
 
 function updateSliders(){
-	$(".scroll-box").each(function( index ){
-		$( this ).css("top",
-			position * 1/COEFFICIENT**(index - 1) % SCROLL_BAR_HEIGHT
-		);
+	$(".scrollbar").each(function( index ){
+		var max = maxPos(index);
+		var posi = pos(index);
+		$( this ).children(".scroll-box").css("top", posi % SCROLL_BAR_HEIGHT);
+		if( posi >= max - (maxPos(index) % SCROLL_BAR_HEIGHT) )
+		{
+			$( this ).children(".scroll-stopper").css("display", "block");
+		}
+		else
+		{
+			$( this ).children(".scroll-stopper").css("display", "none");
+		}
 	});
+}
+
+function maxPos(index)
+{
+	return length * 1/COEFFICIENT**(index - 1);
+}
+
+function pos(index)
+{
+	return position * 1/COEFFICIENT**(index - 1);
+}
+
+function invPos(index)
+{
+	return COEFFICIENT**(index - 1);
 }
 
 /*
