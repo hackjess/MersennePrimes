@@ -19,7 +19,7 @@ $(document).ready(function(){
 	
 	if( exponent == '' )
 	{
-		//window.location.href = "index.html";
+		window.location.href = "index.html";
 	}
 	
 	extern = new Loader(exponent);
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	
 	if( length == -1 )
 	{
-		//window.location.href = "index.html";
+		window.location.href = "index.html";
 	}
 	
 	//Set height of scroll stops
