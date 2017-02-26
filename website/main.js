@@ -97,15 +97,22 @@ function update(){
 }
 
 function updateContent(){
+	
+	//Row contents
 	var contentWidth = $(".digits").innerWidth();
 	var digitsPerRow = Math.floor( contentWidth / DIGIT_WIDTH);
 	var row = Math.floor( position / digitsPerRow );
+	var percent = (position - row * digitsPerRow) / digitsPerRow;
 	
 	$(".digits").each(function( index ){
 		$( this ).html(
 			extern.getString(row * digitsPerRow, digitsPerRow));
 		row += 1;
 	});
+	
+	//Row position
+	$(".digits").css("top", parseInt($(".digits").css("height")) * -percent);
+	
 }
 
 function updateSliders(){
