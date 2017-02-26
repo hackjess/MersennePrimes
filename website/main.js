@@ -2,6 +2,7 @@ var BLOCK_SIZE = 10000; //Number of characters!
 var SCROLL_BAR_HEIGHT = 475;
 var COEFFICIENT = 9;
 var SCROLL_BOX_HEIGHT = 20;
+var SCROLL_BUTTON_INTERVAL = 100;
 
 var position = 0;
 var mouseY = 0;
@@ -63,6 +64,31 @@ $(document).ready(function(){
 	$(window).resize(function(){
 		update();
 	});
+	
+	var upButtonInterval;
+	$("#btn-up").mousedown(function() {
+		upButtonInterval = setInterval(scrollUp, SCROLL_BUTTON_INTERVAL);
+	}).mouseup(function() {
+		clearInterval(upButtonInterval);
+	}).mouseleave(function() {
+		clearInterval(upButtonInterval);
+	});;
+	var downButtonInterval;
+	$("#btn-down").mousedown(function() {
+		downButtonInterval = setInterval(scrollDown, SCROLL_BUTTON_INTERVAL);
+	}).mouseup(function() {
+		clearInterval(downButtonInterval);
+	}).mouseleave(function() {
+		clearInterval(downButtonInterval);
+	});
+	function scrollUp() {
+		position -= 1;
+		updateSliders();
+	}
+	function scrollDown() {
+		position += 1;
+		updateSliders();
+	}
 	
 });
 
