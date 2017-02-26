@@ -4,7 +4,7 @@ var position = 0;
 var subposition = 0.0;
 var mouseY = 0;
 var active = false;
-var weight = 0;
+var startingIndex = 0;
 var startingPos = [];
 
 var blocks = {};
@@ -36,7 +36,8 @@ $(document).ready(function(){
 		{
 			var delta = e.pageY - mouseY;
 			$(".scroll-box").each(function( index ){
-				$( this ).css("top",startingPos[index] + delta * index);
+				$( this ).css("top",( startingPos[index]
+					+ delta * 1/10**(index - startingIndex) ) % 475 );
 			});
 		}
 	});
@@ -46,7 +47,7 @@ $(document).ready(function(){
 		$(".scroll-box").each(function( index ){
 			startingPos[index] = parseInt( $( this ).css("top") );
 		});
-		weight = (6 - $(this).index()) * 10;
+		startingIndex = $(this).index();
 	});
 	
 	$(window).mouseup(function(){
