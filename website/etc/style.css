@@ -76,7 +76,8 @@ div.row.content{
 
 div.digits{
 	font-size: 30px;
-	word-wrap:break-word
+	word-wrap: break-word;
+	position: relative;
 }
 
 body {
