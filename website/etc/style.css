@@ -63,9 +63,9 @@ text-align: center;
 }
 .scroll-stopper{
 	display: none;
-   width: 100%;
+   	width: 100%;
 	height: 100%;
-	background-color: black;
+	background-color: #470FC1;
 	position: relative;
 }
 
