@@ -35,22 +35,22 @@ $(document).ready(function(){
 		else
 		{
 			var delta = e.pageY - mouseY;
-			
+			$(".scroll-box").each(function( index ){
+				$( this ).css("top",startingPos[index] + delta * index);
+			});
 		}
 	});
 	
 	$(".scrollbar").mousedown(function(){
 		active = true;
 		$(".scroll-box").each(function( index ){
-			startingPos[index] = $( this ).css("top");
+			startingPos[index] = parseInt( $( this ).css("top") );
 		});
-		console.log(startingPos);
 		weight = (6 - $(this).index()) * 10;
 	});
 	
 	$(window).mouseup(function(){
 		active = false;
-		console.log("up");
 	});
 	
 	$(window).resize(function(){
