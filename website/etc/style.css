@@ -24,7 +24,6 @@ a.btn.btn-info.btn-lg.home {
 }
 .row .scrollers {
 	width: 95%;
-	height: 200px;
 	margin: auto;
 	padding: 10px;
 	text-align: center;
@@ -33,11 +32,14 @@ a.btn.btn-info.btn-lg.home {
 	width: 14.28%;
 	height: 475px;
 	float: left;
-	border: solid black 1px;
+	border-left: solid black 1px;
+	border-bottom: solid black 1px;
+	border-top: solid black 1px;
 	overflow: hidden;
 }
 .scrollbar.last {
     width: 13.5%;
+	border-right: solid black 1px;
 }
 .col-md-12{
 width: 100%;
@@ -73,7 +75,17 @@ div.row.content{
 	margin-right: 20px;
 }
 
-div.content-1, .content-2{
+div.digits{
 	font-size: 30px;
 	word-wrap:break-word
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
