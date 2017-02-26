@@ -1,6 +1,7 @@
-BLOCK_SIZE = 10000; //Number of characters!
-SCROLL_BAR_HEIGHT = 475;
-COEFFICIENT = 9
+var BLOCK_SIZE = 10000; //Number of characters!
+var SCROLL_BAR_HEIGHT = 475;
+var COEFFICIENT = 9;
+var SCROLL_BOX_HEIGHT = 20;
 
 var position = 0;
 var mouseY = 0;
@@ -9,7 +10,7 @@ var startingIndex = 0;
 var startingPosition = 0;
 var length = 22338618; //Reset back to zero & uncomment lines below
 
-var blocks = {};
+//var blocks = {};
 
 $(document).ready(function(){
 	
@@ -27,7 +28,13 @@ $(document).ready(function(){
 		//window.location.href = "index.html";
 	}
 	
-	update();
+	//Set height of scroll stops
+	$(".scroll-stopper").each(function( index ){
+		var value = (length * 1/COEFFICIENT**(index - 1) % SCROLL_BAR_HEIGHT);
+		console.log(index, value);
+		//$( this ).css("height", SCROLL_BAR_HEIGHT);
+		$( this ).css("top", value);
+	});
 	
 	$(document).mousemove(function(e){
 		if( !active )
@@ -69,9 +76,10 @@ function updateSliders(){
 	});
 }
 
+/*
 function update(){
 	
-	/*var block = Math.floor(position / BLOCK_SIZE);
+	var block = Math.floor(position / BLOCK_SIZE);
 	if( !isInDict(blocks, block ) )
 		blocks[block] = fetchBlock(exponent, block);
 	if( !isInDict(blocks, block + 1) )
@@ -82,7 +90,7 @@ function update(){
 	var row = Math.floor( position / charsPerLine() );
 	
 	$("#content-1").html(blocks[block]);
-	$("#content-2").html(blocks[block + 1]);*/
+	$("#content-2").html(blocks[block + 1]);
 }
 
 function charsPerLine(){
@@ -100,3 +108,4 @@ function isInDict(dict, name ) {
 	}
 	return false;
 }
+*/
