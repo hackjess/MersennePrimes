@@ -44,9 +44,7 @@ $(document).ready(function(){
 		else
 		{
 			var delta = e.pageY - mouseY;
-			position = Math.min(length, Math.max( 0,
-				startingPosition + delta * invPos(startingIndex)
-			));
+			setPos( startingPosition + delta * invPos(startingIndex) );
 			updateSliders();
 		}
 	});
@@ -82,11 +80,11 @@ $(document).ready(function(){
 		clearInterval(downButtonInterval);
 	});
 	function scrollUp() {
-		position -= 1;
+		setPos(position - 1);
 		updateSliders();
 	}
 	function scrollDown() {
-		position += 1;
+		setPos(position + 1);
 		updateSliders();
 	}
 	
@@ -106,6 +104,11 @@ function updateSliders(){
 			$( this ).children(".scroll-stopper").css("display", "none");
 		}
 	});
+}
+
+function setPos(newPos)
+{
+	position = Math.min(length, Math.max( 0, newPos ));
 }
 
 function maxPos(index)
