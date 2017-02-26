@@ -1,11 +1,12 @@
 BLOCK_SIZE = 10000; //Number of characters!
+SCROLL_BAR_HEIGHT = 475;
 
 var position = 0;
-var subposition = 0.0;
 var mouseY = 0;
 var active = false;
 var startingIndex = 0;
-var startingPos = [];
+var startingPosition = 0;
+var length = 600000; //Reset back to zero & uncomment lines below
 
 var blocks = {};
 
@@ -18,7 +19,7 @@ $(document).ready(function(){
 		//window.location.href = "index.html";
 	}
 	
-	var length = fetchSize(exponent);
+	//length = fetchSize(exponent);
 	
 	if( length == -1 )
 	{
@@ -35,19 +36,18 @@ $(document).ready(function(){
 		else
 		{
 			var delta = e.pageY - mouseY;
-			$(".scroll-box").each(function( index ){
-				$( this ).css("top",( startingPos[index]
-					+ delta * 1/10**(index - startingIndex) ) % 475 );
-			});
+			position = Math.min(length, Math.max( 0,
+				startingPosition +
+				delta * 10**(startingIndex - 1)
+			));
+			updateSliders();
 		}
 	});
 	
 	$(".scrollbar").mousedown(function(){
 		active = true;
-		$(".scroll-box").each(function( index ){
-			startingPos[index] = parseInt( $( this ).css("top") );
-		});
 		startingIndex = $(this).index();
+		startingPosition = position;
 	});
 	
 	$(window).mouseup(function(){
@@ -59,6 +59,15 @@ $(document).ready(function(){
 	});
 	
 });
+
+function updateSliders(){
+	console.log(position);
+	$(".scroll-box").each(function( index ){
+		$( this ).css("top",
+			position * 1/10**(index - 1) % SCROLL_BAR_HEIGHT
+		);
+	});
+}
 
 function update(){
 	
