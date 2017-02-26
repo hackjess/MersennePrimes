@@ -2,7 +2,8 @@ var SCROLL_BAR_HEIGHT = 475;
 var DIGIT_WIDTH = 18;
 var COEFFICIENT = 9;
 var SCROLL_BOX_HEIGHT = 20;
-var SCROLL_BUTTON_INTERVAL = 100;
+var SCROLL_BUTTON_INTERVAL = 24;
+var SCROLL_BUTTON_STEP = 2;
 
 var position = 0;
 var mouseY = 0;
@@ -51,6 +52,8 @@ $(document).ready(function(){
 	});
 	
 	$(".scrollbar").mousedown(function(){
+		$("input").attr('checked', false);
+		clearInterval(autoScrollInterval);
 		active = true;
 		startingIndex = $(this).index();
 		startingPosition = position;
@@ -64,16 +67,22 @@ $(document).ready(function(){
 		update();
 	});
 	
+	//Btn up
 	var upButtonInterval;
 	$("#btn-up").mousedown(function() {
+		$("input").attr('checked', false);
+		clearInterval(autoScrollInterval);
 		upButtonInterval = setInterval(scrollUp, SCROLL_BUTTON_INTERVAL);
 	}).mouseup(function() {
 		clearInterval(upButtonInterval);
 	}).mouseleave(function() {
 		clearInterval(upButtonInterval);
 	});;
-	var downButtonInterval;
+	//Btn down
+	var downButtonInterval; //Serves dual purpose
 	$("#btn-down").mousedown(function() {
+		$("input").attr('checked', false);
+		clearInterval(autoScrollInterval);
 		downButtonInterval = setInterval(scrollDown, SCROLL_BUTTON_INTERVAL);
 	}).mouseup(function() {
 		clearInterval(downButtonInterval);
@@ -81,13 +90,23 @@ $(document).ready(function(){
 		clearInterval(downButtonInterval);
 	});
 	function scrollUp() {
-		setPos(position - 1);
+		setPos(position - SCROLL_BUTTON_STEP);
 		update();
 	}
 	function scrollDown() {
-		setPos(position + 1);
+		setPos(position + SCROLL_BUTTON_STEP);
 		update();
 	}
+	
+	//checkbox
+	var autoScrollInterval;
+	$("input").change(function(){
+		if (this.checked) {
+			autoScrollInterval = setInterval(scrollDown, SCROLL_BUTTON_INTERVAL);
+		} else {
+			clearInterval(autoScrollInterval);
+		}
+	});
 	
 });
 
