@@ -1,4 +1,3 @@
-var BLOCK_SIZE = 10000; //Number of characters!
 var SCROLL_BAR_HEIGHT = 475;
 var COEFFICIENT = 9;
 var SCROLL_BOX_HEIGHT = 20;
@@ -9,9 +8,9 @@ var mouseY = 0;
 var active = false;
 var startingIndex = 0;
 var startingPosition = 0;
-var length = 22338618; //Reset back to zero & uncomment lines below
+var length = 0;
 
-//var blocks = {};
+var extern;
 
 $(document).ready(function(){
 	
@@ -19,14 +18,15 @@ $(document).ready(function(){
 	
 	if( exponent == '' )
 	{
-		//window.location.href = "index.html";
+		window.location.href = "index.html";
 	}
 	
-	//length = fetchSize(exponent);
+	extern = new Loader(exponent);
+	length = extern.getLength();
 	
 	if( length == -1 )
 	{
-		//window.location.href = "index.html";
+		window.location.href = "index.html";
 	}
 	
 	//Set height of scroll stops
@@ -125,37 +125,3 @@ function invPos(index)
 {
 	return COEFFICIENT**(index - 1);
 }
-
-/*
-function update(){
-	
-	var block = Math.floor(position / BLOCK_SIZE);
-	if( !isInDict(blocks, block ) )
-		blocks[block] = fetchBlock(exponent, block);
-	if( !isInDict(blocks, block + 1) )
-		blocks[block + 1] = fetchBlock(exponent, block + 1);
-	
-	var frontOffset = position % charsPerLine();
-	
-	var row = Math.floor( position / charsPerLine() );
-	
-	$("#content-1").html(blocks[block]);
-	$("#content-2").html(blocks[block + 1]);
-}
-
-function charsPerLine(){
-	//TODO
-}
-
-function heightPerLine(){
-	//TODO
-}
-
-function isInDict(dict, name ) {
-	for(var i = 0, len = dict.length; i < len; i++) {
-		if( dict[ i ].key === name )
-			return true;
-	}
-	return false;
-}
-*/
